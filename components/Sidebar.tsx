@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Settings,
 } from 'lucide-react';
+import { useRole, getRoleLabel } from '@/lib/useRole';
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -28,6 +29,7 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { role, mounted } = useRole();
 
   return (
     <aside
@@ -59,6 +61,11 @@ export default function Sidebar() {
                 RollCall
               </div>
               <div style={{ color: '#6b7280', fontSize: '11px' }}>Austin BJJ Academy</div>
+              {mounted && (
+                <div style={{ color: '#d4a843', fontSize: '10px', fontWeight: 600, marginTop: '2px', letterSpacing: '0.02em' }}>
+                  {getRoleLabel(role)}
+                </div>
+              )}
             </div>
           </div>
         </Link>
