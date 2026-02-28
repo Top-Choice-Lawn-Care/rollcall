@@ -99,15 +99,14 @@ export default function SchedulePage() {
               <div
                 key={`time-${hour}`}
                 style={{
-                  padding: '8px 8px',
+                  padding: '12px 8px 4px',
                   textAlign: 'right',
                   color: '#4b5563',
                   fontSize: '11px',
                   borderTop: '1px solid rgba(255,255,255,0.04)',
-                  height: '64px',
+                  minHeight: '64px',
                   display: 'flex',
                   alignItems: 'flex-start',
-                  paddingTop: '12px',
                 }}
               >
                 {formatHour(hour)}
@@ -122,9 +121,11 @@ export default function SchedulePage() {
                     style={{
                       borderTop: '1px solid rgba(255,255,255,0.04)',
                       borderLeft: '1px solid rgba(255,255,255,0.06)',
-                      height: '64px',
+                      minHeight: '64px',
                       padding: '4px',
-                      position: 'relative',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '3px',
                     }}
                   >
                     {classes.map((cls) => (
