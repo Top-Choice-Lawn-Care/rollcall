@@ -7,13 +7,18 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'instructor' | 'student';
+  role: 'super_admin' | 'admin' | 'instructor' | 'student';
+  gymId?: string;    // null for super_admin
+  gymName?: string;
 }
 
 const DEMO_USERS: Record<string, AuthUser> = {
-  'admin@gbdrip.com': { id: 'admin-1', name: 'Alexandre Santos', email: 'admin@gbdrip.com', role: 'admin' },
-  'instructor@gbdrip.com': { id: 'inst-1', name: 'Robert Bookman', email: 'instructor@gbdrip.com', role: 'instructor' },
-  'student@gbdrip.com': { id: 'stu-1', name: 'Carlos Mendez', email: 'student@gbdrip.com', role: 'student' },
+  // RollCall company account — sees all gyms, provisions new ones
+  'super@rollcall.app': { id: 'super-1', name: 'RollCall Admin', email: 'super@rollcall.app', role: 'super_admin' },
+  // Gym-level accounts
+  'admin@gbdrip.com': { id: 'admin-1', name: 'Alexandre Santos', email: 'admin@gbdrip.com', role: 'admin', gymId: 'gym-gbdrip', gymName: 'Gracie Barra Dripping Springs' },
+  'instructor@gbdrip.com': { id: 'inst-1', name: 'Robert Bookman', email: 'instructor@gbdrip.com', role: 'instructor', gymId: 'gym-gbdrip', gymName: 'Gracie Barra Dripping Springs' },
+  'student@gbdrip.com': { id: 'stu-1', name: 'Carlos Mendez', email: 'student@gbdrip.com', role: 'student', gymId: 'gym-gbdrip', gymName: 'Gracie Barra Dripping Springs' },
 };
 
 export function getCurrentUser(): AuthUser | null {

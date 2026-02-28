@@ -14,8 +14,9 @@ import {
   Settings,
 } from 'lucide-react';
 import { useRole, getRoleLabel } from '@/lib/useRole';
+import { getCurrentUser } from '@/lib/auth';
 
-const navItems = [
+const gymNavItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Members', href: '/members', icon: Users },
   { label: 'Schedule', href: '/schedule', icon: Calendar },
@@ -27,9 +28,17 @@ const navItems = [
   { label: 'Settings', href: '/settings', icon: Settings },
 ];
 
+const superAdminNavItems = [
+  { label: 'Gyms', href: '/gyms', icon: LayoutDashboard },
+  { label: 'Settings', href: '/settings', icon: Settings },
+];
+
 export default function Sidebar() {
   const pathname = usePathname();
   const { role, mounted } = useRole();
+  const user = getCurrentUser();
+  const isSuperAdmin = user?.role === 'super_admin';
+  const navItems = isSuperAdmin ? superAdminNavItems : gymNavItems;
 
   return (
     <aside

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getCurrentUser } from '@/lib/auth';
 
-export type Role = 'admin' | 'instructor' | 'student';
+export type Role = 'super_admin' | 'admin' | 'instructor' | 'student';
 
 const VIEW_KEY = 'rollcall_view_as';
 const ROLES: Role[] = ['admin', 'instructor', 'student'];
@@ -40,7 +40,7 @@ export function useRole() {
     return (getCurrentUser()?.role as Role) ?? 'student';
   })();
 
-  // Only admins can switch
+  // Only gym admins can switch views (super_admin has their own fixed view)
   const canSwitch = mounted && baseRole === 'admin';
 
   const setRole = useCallback((newRole: Role) => {
@@ -70,6 +70,7 @@ export function useRole() {
 
 export function getRoleLabel(role: Role): string {
   switch (role) {
+    case 'super_admin': return 'RollCall Admin';
     case 'admin': return 'Admin Mode';
     case 'instructor': return 'Instructor Mode';
     case 'student': return 'Student Mode';
@@ -78,7 +79,8 @@ export function getRoleLabel(role: Role): string {
 
 export function getRoleIcon(role: Role): string {
   switch (role) {
-    case 'admin': return '🏛️';
+    case 'super_admin': return '🏛️';
+    case 'admin': return '⚙️';
     case 'instructor': return '🥋';
     case 'student': return '👤';
   }

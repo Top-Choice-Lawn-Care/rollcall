@@ -21,7 +21,7 @@ export default function LoginPage() {
         setError('Invalid credentials. Check the demo accounts below.');
         return;
       }
-      router.replace('/dashboard');
+      router.replace(user.role === 'super_admin' ? '/gyms' : '/dashboard');
     } finally {
       setLoading(false);
     }
@@ -198,9 +198,10 @@ export default function LoginPage() {
             Demo Accounts (any password)
           </div>
           {[
-            { email: 'admin@gbdrip.com', role: 'Admin' },
-            { email: 'instructor@gbdrip.com', role: 'Instructor' },
-            { email: 'student@gbdrip.com', role: 'Student' },
+            { email: 'super@rollcall.app', role: '🏛️ RollCall Super Admin' },
+            { email: 'admin@gbdrip.com', role: '⚙️ Gym Admin' },
+            { email: 'instructor@gbdrip.com', role: '🥋 Instructor' },
+            { email: 'student@gbdrip.com', role: '👤 Student' },
           ].map(({ email: demoEmail, role }) => (
             <button
               key={demoEmail}

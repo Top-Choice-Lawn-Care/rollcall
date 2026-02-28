@@ -9,12 +9,13 @@ export interface CurrentUser {
 }
 
 const USER_BY_ROLE: Record<Role, CurrentUser> = {
-  admin: { name: 'Nolan', role: 'admin', title: 'Administrator' },
-  instructor: { name: 'Alexandre Santos', role: 'instructor', title: 'Head Instructor' },
+  super_admin: { name: 'RollCall Admin', role: 'super_admin', title: 'Platform Administrator' },
+  admin: { name: 'Alexandre Santos', role: 'admin', title: 'Gym Administrator' },
+  instructor: { name: 'Robert Bookman', role: 'instructor', title: 'Head Instructor' },
   student: { name: 'Carlos Mendez', role: 'student', title: 'Blue Belt · 3 Stripes' },
 };
 
 export function useCurrentUser(): CurrentUser {
   const { role } = useRole();
-  return USER_BY_ROLE[role];
+  return USER_BY_ROLE[role] ?? USER_BY_ROLE['student'];
 }
