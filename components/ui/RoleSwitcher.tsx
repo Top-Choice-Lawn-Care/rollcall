@@ -3,14 +3,15 @@
 import { useRole, getRoleIcon, getRoleLabel } from '@/lib/useRole';
 
 export default function RoleSwitcher() {
-  const { role, cycleRole, mounted } = useRole();
+  const { role, cycleRole, mounted, canSwitch } = useRole();
 
-  if (!mounted) return null;
+  // Only render after hydration and only for admins
+  if (!mounted || !canSwitch) return null;
 
   return (
     <button
       onClick={cycleRole}
-      title={`Current: ${getRoleLabel(role)} — click to switch`}
+      title={`Current: ${getRoleLabel(role)} — click to switch view`}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
